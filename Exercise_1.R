@@ -17,3 +17,12 @@ c(0:9)[is.na(match(c(0:9), mod.sales))]
 car.sales[c(5,7)] = NA
 #(7)
 car.sales[c(5,7)] = mean(car.sales, na.rm=TRUE)
+
+#Q.4
+#(1)
+lifespan <- abs(round(100*sin(1:99)))
+#(1)
+smoker<- rep(c("yes", "no", "yes"), times = 33)
+#(2)
+treatment<- rep(c("yes", "no"), times = 49)
+append(treatment, "yes")
