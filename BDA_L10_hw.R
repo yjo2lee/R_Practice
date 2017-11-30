@@ -14,6 +14,7 @@ ret_cor = 0.2235613; z_ret = 0.5*log((1+ret_cor)/(1-ret_cor))
 
 # 11.35-36
 # Hepatic Disease
+library(tidyverse)
 load("/Users/sjlee/Desktop/school4_2/BioDataAnalysis/Data/HORMONE.DAT.rdata")
 
 # make column having difference
@@ -26,21 +27,19 @@ hormone["Bilsecdiff"] <- Bilsecdiff
 hormone["Pansecdiff"] <- NA
 hormone["Pansecdiff"] <- Pansecdiff
 
-#Bilsec by hormone 
-Bilsec.2<-hormone$Bilsecdiff[which(hormone["Hormone"]==2)]
-Bilsec.3<-hormone$Bilsecdiff[which(hormone["Hormone"]==3)]
+#Bilsec &Dose by hormone_using select(), filter()
+Bilsec.2<-select(filter(hormone, Hormone == 2), Hormone, Bilsecdiff)
+Bilsec.3<-select(filter(hormone, Hormone == 3), Hormone, Bilsecdiff)
+
+#Bilsec & Dose by hormone_different method
 Bilsec.4<-hormone$Bilsecdiff[which(hormone["Hormone"]==4)]
 Bilsec.5<-hormone$Bilsecdiff[which(hormone["Hormone"]==5)]
-
-#Dose by hormone 
-Hormone.2<-hormone$Dose[which(hormone["Hormone"]==2)]
-Hormone.3<-hormone$Dose[which(hormone["Hormone"]==3)]
 Hormone.4<-hormone$Dose[which(hormone["Hormone"]==4)]
 Hormone.5<-hormone$Dose[which(hormone["Hormone"]==5)]
 
 #lin.reg.analysis_Bilsec with hormone
-lm.Bilsec.2<- lm(Bilsec.2~Hormone.2)
-lm.Bilsec.3<- lm(Bilsec.3~Hormone.3)
+lm.Bilsec.2<- lm(Bilsec.2$Bilsecdiff~Bilsec.2$Hormone)
+lm.Bilsec.3<- lm(Bilsec.3$Bilsecdiff~Bilsec.3$Hormone)
 lm.Bilsec.4<- lm(Bilsec.4~Hormone.4)
 lm.Bilsec.5<- lm(Bilsec.5~Hormone.5)
 
