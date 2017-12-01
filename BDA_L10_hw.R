@@ -28,8 +28,8 @@ hormone["Pansecdiff"] <- NA
 hormone["Pansecdiff"] <- Pansecdiff
 
 #Bilsec &Dose by hormone_using select(), filter()
-Bilsec.2<-select(filter(hormone, Hormone == 2), Hormone, Bilsecdiff)
-Bilsec.3<-select(filter(hormone, Hormone == 3), Hormone, Bilsecdiff)
+Bilsec.2<-select(filter(hormone, Hormone == 2), Dose, Bilsecdiff)
+Bilsec.3<-select(filter(hormone, Hormone == 3), Dose, Bilsecdiff)
 
 #Bilsec & Dose by hormone_different method
 Bilsec.4<-hormone$Bilsecdiff[which(hormone["Hormone"]==4)]
@@ -38,8 +38,8 @@ Hormone.4<-hormone$Dose[which(hormone["Hormone"]==4)]
 Hormone.5<-hormone$Dose[which(hormone["Hormone"]==5)]
 
 #lin.reg.analysis_Bilsec with hormone
-lm.Bilsec.2<- lm(Bilsec.2$Bilsecdiff~Bilsec.2$Hormone)
-lm.Bilsec.3<- lm(Bilsec.3$Bilsecdiff~Bilsec.3$Hormone)
+lm.Bilsec.2<- lm(Bilsec.2$Bilsecdiff~Bilsec.2$Dose)
+lm.Bilsec.3<- lm(Bilsec.3$Bilsecdiff~Bilsec.3$Dose)
 lm.Bilsec.4<- lm(Bilsec.4~Hormone.4)
 lm.Bilsec.5<- lm(Bilsec.5~Hormone.5)
 
