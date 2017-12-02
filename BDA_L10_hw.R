@@ -12,7 +12,7 @@ Lxy<- 180750/112.1
 cor.test(reticulocytes, lymphocytes)
 ret_cor = 0.2235613; z_ret = 0.5*log((1+ret_cor)/(1-ret_cor))
 
-# 11.35-36
+# 11.35
 # Hepatic Disease
 library(tidyverse)
 load("/Users/sjlee/Desktop/school4_2/BioDataAnalysis/Data/HORMONE.DAT.rdata")
@@ -27,7 +27,7 @@ hormone["Bilsecdiff"] <- Bilsecdiff
 hormone["Pansecdiff"] <- NA
 hormone["Pansecdiff"] <- Pansecdiff
 
-#Bilsec &Dose by hormone_using select(), filter()
+#Bilsec &Dose by hormone_using select(), filter()_hormone2,3
 Bilsec.2<-select(filter(hormone, Hormone == 2), Dose, Bilsecdiff)
 Bilsec.3<-select(filter(hormone, Hormone == 3), Dose, Bilsecdiff)
 
@@ -42,18 +42,89 @@ lm.Bilsec.2<- lm(Bilsec.2$Bilsecdiff~Bilsec.2$Dose)
 lm.Bilsec.3<- lm(Bilsec.3$Bilsecdiff~Bilsec.3$Dose)
 lm.Bilsec.4<- lm(Bilsec.4~Hormone.4)
 lm.Bilsec.5<- lm(Bilsec.5~Hormone.5)
+summary(lm.Bilsec.2); summary(lm.Bilsec.3); summary(lm.Bilsec.4); summary(lm.Bilsec.5)
+
+#Each plot of residusal agianst x_bilsec
+bilsec2.plot<-qplot(Bilsec.2$Dose, resid(lm.Bilsec.2))
+bilsec3.plot<-qplot(Bilsec.3$Dose, resid(lm.Bilsec.3))
+bilsec4.plot<-qplot(Hormone.4, resid(lm.Bilsec.4))
+bilsec5.plot<-qplot(Hormone.5, resid(lm.Bilsec.5))
+
+#plots of residusal agianst x_bilsec in one figure
+bilsec.plot<-par(mfrow = c(2,2))
+plot(Bilsec.2$Dose, resid(lm.Bilsec.2))
+plot(Bilsec.3$Dose, resid(lm.Bilsec.3))
+plot(Hormone.4, resid(lm.Bilsec.4))
+plot(Hormone.5, resid(lm.Bilsec.5))
 
 #Pansec by hormone 
-Pansec.2<-hormone$Pansecdiff[which(hormone["Hormone"]==2)]
-Pansec.3<-hormone$Pansecdiff[which(hormone["Hormone"]==3)]
-Pansec.4<-hormone$Pansecdiff[which(hormone["Hormone"]==4)]
-Pansec.5<-hormone$Pansecdiff[which(hormone["Hormone"]==5)]
+Pansec.2<-select(filter(hormone, Hormone == 2), Dose, Pansecdiff)
+Pansec.3<-select(filter(hormone, Hormone == 3), Dose, Pansecdiff)
+Pansec.4<-select(filter(hormone, Hormone == 4), Dose, Pansecdiff)
+Pansec.5<-select(filter(hormone, Hormone == 5), Dose, Pansecdiff)
 
 #lin.reg.analysis_Pansec with hormone
-lm.Pansec.2<- lm(Pansec.2~Hormone.2)
-lm.Pansec.3<- lm(Pansec.3~Hormone.3)
-lm.Pansec.4<- lm(Pansec.4~Hormone.4)
-lm.Pansec.5<- lm(Pansec.5~Hormone.5)
+lm.Pansec.2<- lm(Pansec.2$Pansecdiff~Pansec.2$Dose)
+lm.Pansec.3<- lm(Pansec.3$Pansecdiff~Pansec.3$Dose)
+lm.Pansec.4<- lm(Pansec.4$Pansecdiff~Pansec.4$Dose)
+lm.Pansec.5<- lm(Pansec.5$Pansecdiff~Pansec.5$Dose)
+
+#plot of residusal agianst x_pansec
+pansec.plot<-par(mfrow = c(2,2))
+plot(Pansec.2$Dose, resid(lm.Pansec.2))
+plot(Pansec.3$Dose, resid(lm.Pansec.3))
+plot(Pansec.4$Dose, resid(lm.Pansec.4))
+plot(Pansec.5$Dose, resid(lm.Pansec.5))
+
+#PH levels(11.36)
+# make column having difference
+Bilphdiff<-hormone$Bilphpt-hormone$Bilphpr
+Panphdiff<-hormone$Panphpt-hormone$Panphpr
+
+#add column to a list
+hormone["Bilphdiff"] <- NA
+hormone["Bilphdiff"] <- Bilphdiff
+hormone["Panphdiff"] <- NA
+hormone["Panphdiff"] <- Panphdiff
+
+#Bilsec &Dose by hormone
+Bilph.2<-select(filter(hormone, Hormone == 2), Dose, Bilphdiff)
+Bilph.3<-select(filter(hormone, Hormone == 3), Dose, Bilphdiff)
+Bilph.4<-select(filter(hormone, Hormone == 4), Dose, Bilphdiff)
+Bilph.5<-select(filter(hormone, Hormone == 5), Dose, Bilphdiff)
+
+
+#lin.reg.analysis_Bilsec with hormone
+lm.Bilph.2<- lm(Bilph.2$Bilphdiff~Bilph.2$Dose)
+lm.Bilph.3<- lm(Bilph.3$Bilphdiff~Bilph.3$Dose)
+lm.Bilph.4<- lm(Bilph.4$Bilphdiff~Bilph.4$Dose)
+lm.Bilph.5<- lm(Bilph.5$Bilphdiff~Bilph.5$Dose)
+
+#plots of residusal agianst x_bilsec in one figure
+bilph.plot<-par(mfrow = c(2,2))
+plot(Bilph.2$Dose, resid(lm.Bilph.2))
+plot(Bilph.3$Dose, resid(lm.Bilph.3))
+plot(Bilph.4$Dose, resid(lm.Bilph.4))
+plot(Bilph.5$Dose, resid(lm.Bilph.5))
+
+#Panph by hormone 
+Panph.2<-select(filter(hormone, Hormone == 2), Dose, Panphdiff)
+Panph.3<-select(filter(hormone, Hormone == 3), Dose, Panphdiff)
+Panph.4<-select(filter(hormone, Hormone == 4), Dose, Panphdiff)
+Panph.5<-select(filter(hormone, Hormone == 5), Dose, Panphdiff)
+
+#lin.reg.analysis_Panph with hormone
+lm.Panph.2<- lm(Panph.2$Panphdiff~Panph.2$Dose)
+lm.Panph.3<- lm(Panph.3$Panphdiff~Panph.3$Dose)
+lm.Panph.4<- lm(Panph.4$Panphdiff~Panph.4$Dose)
+lm.Panph.5<- lm(Panph.5$Panphdiff~Panph.5$Dose)
+
+#plot of residusal agianst x
+panph.plot<-par(mfrow = c(2,2))
+plot(Panph.2$Dose, resid(lm.Panph.2))
+plot(Panph.3$Dose, resid(lm.Panph.3))
+plot(Panph.4$Dose, resid(lm.Panph.4))
+plot(Panph.5$Dose, resid(lm.Panph.5))
 
 #11.65
 #age vs. days abstinent from smoking
