@@ -52,7 +52,12 @@ Pansec.5["increasing"] <- NA
 Pansec.5["increasing"] <- (Pansec.5[["Pansecdiff"]]>0)
 
 ##hormone2
-rbind(c(1,2), c(8, 12))
+with(Pansec.2, table(Dose, increasing))
+pansec.2_tt<-rbind(c(1,2), c(8, 12))
+pansec.2x<-pansec.2_tt[1,]
+pannn2<-colSums(pansec.2_tt)
+prop.trend.test(pansec.2x, pannn2, score=c(7.5,15))
+
 ##hormone3
 with(Pansec.3, table(Dose, increasing))
 pansec.3_tt<-rbind(c(2,3,6,5,6,6), c(4, 14, 19, 20, 28, 52))
