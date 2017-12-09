@@ -33,3 +33,20 @@ par(mfrow = c(1,3))   #grpah 분할해서 한 figure에 넣기
 plot(p.raw);abline(h=0.05)   #abline-> h: yvalue
 plot(p.bonf);abline(h = 0.05)
 plot(p.bh);abline(h = 0.05)
+
+#Kruskal-Walis test
+drugs<-c(rep("Indomethacin", 6), rep("Aspirin", 6), rep("Piroxicam",6), rep("BW755C", 6))
+score<-c(2,3,3,3,3,0,
+         1,3,1,2,2,3,
+         3,1,2,1,3,3,
+         1,0,0,0,0,-1)
+oscular<-data.frame(drugs, score)
+kruskal.test(score ~ drugs, data = oscular) 
+
+# Random-effects model
+ID<-rep(1:5,2)
+y<-c(26.6,11.1,8,20.7,5.8,30.4,15,8.1,16.9,8.4)
+logy<-log(y)
+library(lme4)
+
+summary(lmer(logy~(1|as.factor(ID))))
