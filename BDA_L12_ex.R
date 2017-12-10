@@ -50,3 +50,11 @@ logy<-log(y)
 library(lme4)
 
 summary(lmer(logy~(1|as.factor(ID))))
+
+# icc: intraclass correlation coefficient
+# Correlation bw two replicates from the same subject
+# bw yij and yjk where j != k
+# One-way random effects ANOVA
+# in this case
+icc = 0.3260 / (0.3260+0.0287)
+
