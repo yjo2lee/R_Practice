@@ -24,3 +24,17 @@ x[,,2]<-x2
 mantelhaen.test(x)
 
 #4) Multiple Logistic Regression
+case<- c(683, 2537)
+total<- c(2181, 11284)  #control set = total-case
+AGE30<-c(1,0)   # upper than 30: 1
+rst<-glm(cbind(case, total-case)~AGE30, family = binomial(link="logit"))   # logistic regression
+summary(rst)
+
+predict(rst, type="link")   # the estimator of logit(E에 0,1 대입)
+predict(rst, type = "response")   #case/total
+OR<-exp(rst$coef)   #same as OR=(ac/bd)
+
+#CI for OR
+OR.U<-exp(rst$coef +1.96*summary(rst)$coef[,2])
+OR.L<-exp(rst$coef -1.96*summary(rst)$coef[,2])
+cbind(OR,OR.L,OR.U)
