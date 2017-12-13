@@ -38,3 +38,20 @@ OR<-exp(rst$coef)   #same as OR=(ac/bd)
 OR.U<-exp(rst$coef +1.96*summary(rst)$coef[,2])
 OR.L<-exp(rst$coef -1.96*summary(rst)$coef[,2])
 cbind(OR,OR.L,OR.U)
+
+# Using profile likelihood
+exp(cbind(coef(rst),confint(rst)))
+
+#5) Dose-response study_logistic regression
+load("Data/RData_logistic.RData")
+beetles[1:10,] # ungrouped format
+beetles2 # grouped format
+
+## ungrouped data
+fit1<-glm(y~x, data=beetles, family=binomial(link=logit))
+summary(fit1)
+
+## grouped data 
+fit2<-glm(cbind(dead, n-dead)~logdose, data=beetles2, family=binomial(link=logit))
+summary(fit2)
+
