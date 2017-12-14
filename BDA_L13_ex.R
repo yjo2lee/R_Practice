@@ -55,3 +55,22 @@ summary(fit1)
 fit2<-glm(cbind(dead, n-dead)~logdose, data=beetles2, family=binomial(link=logit))
 summary(fit2)
 
+summary(fit2)$cov.unscaled   ## Var(betabhat)
+summary(fit2)$coef   ## Estimates of coef
+fit2$fitted.value   ## fitted value
+1-pchisq(deviance((fit2), df.residual(fit2)))   ## P-value for goodness of fit
+
+## Sample proportions dead, fitted values for the model, 95% pointwise CI for true prob.
+logdose<-beetles2$logdose
+dead<-beetles2$dead
+n<-beetles2$n
+plot(logdose, dead/n, ylim=c(0,1))
+
+lines(logdose, fitted(fit2))
+
+pred<-predict(fit2, se.fit=TRUE)
+U<- pred$fit + 1.96*pred$se.fit
+L<- pred$fit - 1.96*pred$se.fit
+lines(logdose, exp(U)/(1+exp(U)), col="grey")
+lines(logdose, exp(L)/(1+exp(L)), col="grey")
+
