@@ -74,3 +74,16 @@ L<- pred$fit - 1.96*pred$se.fit
 lines(logdose, exp(U)/(1+exp(U)), col="grey")
 lines(logdose, exp(L)/(1+exp(L)), col="grey")
 
+#Prediction
+set.seed(12345)
+idx<-sample(1:nrow(beetles),size=nrow(beetles)*0.7)
+b.train<-beetles[idx,]
+b.test<-beetles[-idx,]
+
+fit<-glm(y~x, data=b.train, family=binomial(link=logit))
+
+yhat_test <- predict(fit, b.test)
+
+library("Epi")
+ROC(test = yhat_test, stat = b.test$y, plot="ROC", AUC=T, main="Logistic Regression")
+
