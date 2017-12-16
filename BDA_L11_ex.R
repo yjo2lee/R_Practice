@@ -1,3 +1,36 @@
+# Chapter_summary
+
+#setting data
+estriol<-read.table("/Users/sjlee/Desktop/school4_2/BioDataAnalysis/Data/estriol.txt")
+colnames(estriol)<-c("i","x","y")
+head(estriol)
+
+# make a dot plot
+library(ggplot2)
+estriol.plot <- qplot(x, y, data = estriol, alpha = I(0.5))
+print(estriol.plot)
+
+# linear reg.
+lm.estriol<-lm(y~x, data=estriol)
+summary(lm.estriol)
+
+# fitted line+dotplot
+coef.estriol<- coef(lm.estriol)   #When using coef.
+fitted.line<-estriol.plot + 
+        geom_abline(intercept = coef.estriol[1], slope = coef.estriol[2])
+
+# anova test(H0: beta1 = 0: using Ftest)
+anova(lm.estriol)
+
+# correlation coefficient
+r<-cor(estriol$x,estriol$y)
+
+# correlation coefficient H0: rho = 0)
+cor.test(estriol$x, estriol$y)
+
+# z transformation
+
+
 #11.1_7
 reticulocytes<-c(3.6, 2.0, 0.3, 0.3, 0.2, 3.0, 0.0, 1.0, 2.2)
 lymphocytes <- c(1700, 3078, 1820, 2706, 2086, 2299, 676, 2088, 2013)
