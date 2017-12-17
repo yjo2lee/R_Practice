@@ -41,7 +41,10 @@ chisq.test(Pansecdiff_cgtable)
 Bilsecdiff_cgtable<- rbind(c(5, 81, 9, 68), c(18, 55, 25, 47))
 chisq.test(Bilsecdiff_cgtable)
 
-#10.40
+# 10.40
+# Use trend test using Chisquare test -> pi= alpha + beta*score
+# H0: beta = 0, H1: beta =! 0, pi: binary
+# Regard as pi continuous
 table(Pansec.2[["Dose"]])  #show how to use table()
 
 Pansec.3["increasing"] <- NA
