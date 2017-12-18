@@ -4,6 +4,12 @@ du_treat<-rbind(c(89,5), c(16, 90))
 mcnemar.test(du_treat)
 du_treat_male<- rbind(c(52,4), c(9, 35))
 mcnemar.test(du_treat_male)
+# 10.12
+# discordant pairs: 13 -> nd/4 < 5
+# normal approximation is not valid
+# Use proportions-Exact test
+binom.test(4,13, p = 0.5, alternative = c("two.sided"), conf.level = 0.95)
+
 
 # 10.37_39
 load("/Users/sjlee/Desktop/school4_2/BioDataAnalysis/Data/HORMONE.DAT.rdata")
