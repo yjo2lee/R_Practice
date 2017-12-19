@@ -1,3 +1,11 @@
+#Ch10. Hypothesis Testing_Categorical Data
+# summary
+# contingency table - two sample test for binomial proportions / exact test for contingency table
+# McNamar's test - version of paired proportion tests
+# sample sizes and Power(trialsize?)
+# R*C contingency table
+# Kappa stat.
+
 # 10.9_12_gastroenterology
 # 10.9_McNemar's test
 du_treat<-rbind(c(89,5), c(16, 90))
